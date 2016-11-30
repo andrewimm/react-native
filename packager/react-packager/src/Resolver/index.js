@@ -43,6 +43,10 @@ const validateOpts = declareOpts({
     type: 'array',
     required: true,
   },
+  platforms: {
+    type: 'array',
+    required: true,
+  },
   cache: {
     type: 'object',
     required: true,
@@ -99,7 +103,7 @@ class Resolver {
           (opts.blacklistRE && opts.blacklistRE.test(filepath));
       },
       providesModuleNodeModules: defaults.providesModuleNodeModules,
-      platforms: defaults.platforms,
+      platforms: opts.platforms,
       preferNativePlatform: true,
       fileWatcher: opts.fileWatcher,
       cache: opts.cache,

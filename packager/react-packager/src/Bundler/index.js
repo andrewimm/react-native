@@ -23,6 +23,7 @@ const declareOpts = require('../lib/declareOpts');
 const imageSize = require('image-size');
 const version = require('../../../../package.json').version;
 const denodeify = require('denodeify');
+const defaults = require('../../../defaults');
 
 const {
   sep: pathSeparator,
@@ -91,6 +92,10 @@ const validateOpts = declareOpts({
     type: 'array',
     default: ['png'],
   },
+  platforms: {
+    type: 'array',
+    default: defaults.platforms,
+  },
   fileWatcher: {
     type: 'object',
     required: true,
@@ -127,6 +132,7 @@ type Options = {
   nonPersistent: boolean,
   assetRoots: Array<string>,
   assetExts: Array<string>,
+  platforms: Array<string>,
   fileWatcher: {},
   assetServer: AssetServer,
   transformTimeoutInterval: ?number,
@@ -194,6 +200,7 @@ class Bundler {
       fileWatcher: opts.fileWatcher,
       minifyCode: this._transformer.minify,
       moduleFormat: opts.moduleFormat,
+      platforms: opts.platforms,
       polyfillModuleNames: opts.polyfillModuleNames,
       projectRoots: opts.projectRoots,
       resetCache: opts.resetCache,

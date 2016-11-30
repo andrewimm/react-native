@@ -27,6 +27,7 @@ const statusPageMiddleware = require('./middleware/statusPageMiddleware.js');
 const systraceProfileMiddleware = require('./middleware/systraceProfileMiddleware.js');
 const webSocketProxy = require('./util/webSocketProxy.js');
 const defaultAssetExts = require('../../packager/defaults').assetExts;
+const defaultPlatforms = require('../../packager/defaults').platforms;
 
 function runServer(args, config, readyCallback) {
   var wsProxy = null;
@@ -84,6 +85,7 @@ function getPackagerServer(args, config) {
     nonPersistent: args.nonPersistent,
     projectRoots: args.projectRoots,
     blacklistRE: config.getBlacklistRE(),
+    platforms: defaultPlatforms.concat(args.platforms),
     cacheVersion: '3',
     getTransformOptionsModulePath: config.getTransformOptionsModulePath,
     transformModulePath: transformModulePath,
